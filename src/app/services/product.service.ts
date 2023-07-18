@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, map } from 'rxjs';
 import { Product } from '../common/product';
+import { ProductCategory } from '../common/product-category';
 
 @Injectable({
   providedIn: 'root'
@@ -15,14 +16,29 @@ export class ProductService {
 
     const url = `${this.baseUrl}/search/findByCategoryId?id=${categoryId}`;
 
-    return this.httpClient.get<GetResponse>(url).pipe(
+    return this.httpClient.get<GetResponseProducts>(url).pipe(
       map(response => response._embedded.products)
     );
   }
+
+  getProductCategories(): Observable<ProductCategory[]> {
+    const url = "http://localhost:8080/api/product-category";
+
+    return this.httpClient.get<GetResponseProductCategory>(url).pipe(
+      map(response => response._embedded.productCategory)
+    )
+  }
+
 }
 
-interface GetResponse {
+interface GetResponseProducts {
   _embedded: {
     products: Product[];
+  }
+}
+
+interface GetResponseProductCategory {
+  _embedded: {
+    productCategory: ProductCategory[];
   }
 }
