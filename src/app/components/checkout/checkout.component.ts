@@ -22,7 +22,7 @@ export class CheckoutComponent implements OnInit {
 
   totalPrice: number = 0;
   totalQuantity: number = 0;
-  
+
   creditCardYears: number[] = [];
   creditCardMonths: number[] = [];
 
@@ -38,47 +38,47 @@ export class CheckoutComponent implements OnInit {
                }
 
   ngOnInit(): void {
-    
+
     this.reviewCartDetails();
 
     this.checkoutFormGroup = this.formBuilder.group({
       customer: this.formBuilder.group({
-        firstName: new FormControl('', 
-                              [Validators.required, 
-                               Validators.minLength(2), 
+        firstName: new FormControl('',
+                              [Validators.required,
+                               Validators.minLength(2),
                                Luv2ShopValidators.notOnlyWhitespace]),
 
-        lastName:  new FormControl('', 
-                              [Validators.required, 
-                               Validators.minLength(2), 
+        lastName:  new FormControl('',
+                              [Validators.required,
+                               Validators.minLength(2),
                                Luv2ShopValidators.notOnlyWhitespace]),
-                               
+
         email: new FormControl('',
                               [Validators.required, Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$')])
       }),
       shippingAddress: this.formBuilder.group({
-        street: new FormControl('', [Validators.required, Validators.minLength(2), 
+        street: new FormControl('', [Validators.required, Validators.minLength(2),
                                      Luv2ShopValidators.notOnlyWhitespace]),
-        city: new FormControl('', [Validators.required, Validators.minLength(2), 
+        city: new FormControl('', [Validators.required, Validators.minLength(2),
                                    Luv2ShopValidators.notOnlyWhitespace]),
         state: new FormControl('', [Validators.required]),
         country: new FormControl('', [Validators.required]),
-        zipCode: new FormControl('', [Validators.required, Validators.minLength(2), 
+        zipCode: new FormControl('', [Validators.required, Validators.minLength(2),
                                       Luv2ShopValidators.notOnlyWhitespace])
       }),
       billingAddress: this.formBuilder.group({
-        street: new FormControl('', [Validators.required, Validators.minLength(2), 
+        street: new FormControl('', [Validators.required, Validators.minLength(2),
                                      Luv2ShopValidators.notOnlyWhitespace]),
-        city: new FormControl('', [Validators.required, Validators.minLength(2), 
+        city: new FormControl('', [Validators.required, Validators.minLength(2),
                                    Luv2ShopValidators.notOnlyWhitespace]),
         state: new FormControl('', [Validators.required]),
         country: new FormControl('', [Validators.required]),
-        zipCode: new FormControl('', [Validators.required, Validators.minLength(2), 
+        zipCode: new FormControl('', [Validators.required, Validators.minLength(2),
                                       Luv2ShopValidators.notOnlyWhitespace])
       }),
       creditCard: this.formBuilder.group({
         cardType: new FormControl('', [Validators.required]),
-        nameOnCard:  new FormControl('', [Validators.required, Validators.minLength(2), 
+        nameOnCard:  new FormControl('', [Validators.required, Validators.minLength(2),
                                           Luv2ShopValidators.notOnlyWhitespace]),
         cardNumber: new FormControl('', [Validators.required, Validators.pattern('[0-9]{16}')]),
         securityCode: new FormControl('', [Validators.required, Validators.pattern('[0-9]{3}')]),
@@ -171,7 +171,7 @@ export class CheckoutComponent implements OnInit {
       // bug fix for states
       this.billingAddressStates = [];
     }
-    
+
   }
 
   onSubmit() {
@@ -202,10 +202,10 @@ export class CheckoutComponent implements OnInit {
 
     // set up purchase
     let purchase = new Purchase();
-    
+
     // populate purchase - customer
     purchase.customer = this.checkoutFormGroup.controls['customer'].value;
-    
+
     // populate purchase - shipping address
     purchase.shippingAddress = this.checkoutFormGroup.controls['shippingAddress'].value;
     const shippingState: State = JSON.parse(JSON.stringify(purchase.shippingAddress.state));
@@ -219,7 +219,7 @@ export class CheckoutComponent implements OnInit {
     const billingCountry: Country = JSON.parse(JSON.stringify(purchase.billingAddress.country));
     purchase.billingAddress.state = billingState.name;
     purchase.billingAddress.country = billingCountry.name;
-  
+
     // populate purchase - order and orderItems
     purchase.order = order;
     purchase.orderItems = orderItems;
@@ -246,7 +246,7 @@ export class CheckoutComponent implements OnInit {
     this.cartService.cartItems = [];
     this.cartService.totalPrice.next(0);
     this.cartService.totalQuantity.next(0);
-    
+
     // reset the form
     this.checkoutFormGroup.reset();
 
@@ -294,7 +294,7 @@ export class CheckoutComponent implements OnInit {
       data => {
 
         if (formGroupName === 'shippingAddress') {
-          this.shippingAddressStates = data; 
+          this.shippingAddressStates = data;
         }
         else {
           this.billingAddressStates = data;
