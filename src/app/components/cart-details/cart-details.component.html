@@ -25,7 +25,7 @@
 
                               <div class="row no-gutters">
                                   <div class="col">
-                                      <button (click)="incrementQuantity(tempCartItem)" class="btn btn-primary btn-sm">
+                                      <button (click)="incrementQuantity(tempCartItem)" class="btn btn-success btn-sm">
                                           <i class="fas fa-plus"></i>
                                       </button>
                                   </div>
@@ -35,7 +35,7 @@
                                   </div>
 
                                   <div class="col">
-                                      <button (click)="decrementQuantity(tempCartItem)" class="btn btn-primary btn-sm">
+                                      <button (click)="decrementQuantity(tempCartItem)" class="btn btn-success btn-sm">
                                           <i class="fas fa-minus"></i>
                                       </button>
                                   </div>
@@ -58,7 +58,7 @@
                           <p>Shipping: FREE</p>
                           <p>Total Price: {{ totalPrice | currency: 'USD' }}</p>
                           <div>
-                            <a routerLink="/checkout" class="btn btn-primary">Checkout</a>
+                            <a routerLink="/checkout" class="btn btn-success">Checkout</a>
                           </div>
                       </td>
                   </tr>

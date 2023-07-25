@@ -11,7 +11,7 @@
               <h1>{{ pr.name }}</h1>
             </a>
             <div class="price">{{pr.unitPrice | currency:"USD"}}</div>
-            <button (click)="addToCart(pr)" class="btn btn-primary btn-sm">Add to cart</button>
+            <button (click)="addToCart(pr)" class="btn btn-success btn-sm">Add to cart</button>
           </div>
         </div>
         <div *ngIf="products?.length == 0" class="alert alert-warning col-md-12" role="alert">
