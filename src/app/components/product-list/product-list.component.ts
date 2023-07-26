@@ -35,9 +35,7 @@ export class ProductListComponent implements OnInit {
   }
 
   listProducts() {
-
     this.searchMode = this.route.snapshot.paramMap.has('keyword');
-
     if(this.searchMode) {
       this.handleSearchProducts();
     }
@@ -48,49 +46,30 @@ export class ProductListComponent implements OnInit {
 
 
   handleSearchProducts() {
-
     const theKeyword: string = this.route.snapshot.paramMap.get('keyword')!;
-
-    // if we have a different keyword than previous
-    // then set thePageNumber to 1
-
     if (this.previousKeyword != theKeyword) {
       this.pageNumber = 1;
     }
-
     this.previousKeyword = theKeyword;
-
     console.log(`keyword=${theKeyword}, thePageNumber=${this.pageNumber}`);
-
-    // now search for the products using keyword
     this.productService.searchProductsPaginate(this.pageNumber - 1,
                                                this.pageSize,
                                                theKeyword).subscribe(this.processResult());
   }
 
   handleListProducts() {
-    // check if id param is available
     const hasCategoryId: boolean = this.route.snapshot.paramMap.has('id')
     if(hasCategoryId) {
-      //+ is a converter from string to number
-      // ! says to compilor that object is not null
       this.currentCategoryId = +this.route.snapshot.paramMap.get('id')!;
     }
     else {
-      // if no category param set category to 1 (books)
       this.currentCategoryId =1
     }
-
-
     if(this.currentCategoryId != this.previousCategoryId) {
       this.pageNumber =1;
     }
-
     this.previousCategoryId = this.currentCategoryId;
-
     console.log(`currentCategoryId=${this.currentCategoryId}, pageNumber=${this.pageNumber}`)
-
-
     this.productService.getProductListPaginate(this.pageNumber-1, this.pageSize, this.currentCategoryId).subscribe(this.processResult());
   }
 

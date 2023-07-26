@@ -20,21 +20,17 @@ export class CartDetailsComponent implements OnInit {
   }
 
   listCartDetails() {
-
-    // get a handle to the cart items
     this.cartItems = this.cartService.cartItems;
 
-    // subscribe to the cart totalPrice
+    // subscribe -if value will change in cartService it will change here as well
     this.cartService.totalPrice.subscribe(
       data => this.totalPrice = data
     );
 
-    // subscribe to the cart totalQuantity
     this.cartService.totalQuantity.subscribe(
       data => this.totalQuantity = data
     );
 
-    // compute cart total price and quantity
     this.cartService.computeCartTotals();
   }
 

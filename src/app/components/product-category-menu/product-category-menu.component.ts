@@ -8,8 +8,6 @@ import { ProductService } from 'src/app/services/product.service';
   styleUrls: ['./product-category-menu.component.css']
 })
 export class ProductCategoryMenuComponent implements OnInit {
-
-
   productCategories: ProductCategory[] = [];
 
   constructor(private productService : ProductService) { }

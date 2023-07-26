@@ -7,7 +7,7 @@ export class CartItem {
   unitPrice: number;
   imageUrl: string;
   quantity: number;
-
+// using product object to create cart item
   constructor(product :Product) {
     this.id = product.id;
     this.name = product.name;
